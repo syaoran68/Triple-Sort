@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Triple Sort</title>
+        <link rel="stylesheet" href="assets/styles.css">
+        <style>body {padding: 0; margin: 0} </style>
+        <script src="p5.js"></script>
+        <!-- loading of the action javascripting can go here-->
+        
+    </head>
+    <body>
+        <h1>Triple Sort!</h1>
+        <h2>Poresort / Mergesort / Quicksort</h2>
+        
+        <canvas id="poresort-grid" width="240" height="800"></canvas>
+        
+        <canvas id="mergesort-grid" width="240" height="800"></canvas>
+        
+        <canvas id="quicksort-grid" width="240" height="800"></canvas>
+        <p>
+    </body>
+        <script src="assets/setup-functions.js"></script>
+        <script>
+            //sample data 
+            var data1 = [0,5,'A',6,2,7,'B',2,'B',6,0,3];
+            var data2 = [0,6,5,6,6,7,1,0,4,0,'B','A'];
+            var data3 = [0,6,8, 4,'B',8,9,3,5,7,5,4]
+
+            //poresort setup
+            var canvas1 = document.getElementById("poresort-grid");
+            var ctx1 = canvas1.getContext("2d");
+            draw_grid(ctx1, 10, 20, 'white', 'yellow');
+            //status counter for poresort
+            poresort_counter = 0
+            update_row(ctx1, data1, 0);
+            
+            //mergesort setup
+            var canvas2 = document.getElementById("mergesort-grid");
+            var ctx2 = canvas2.getContext("2d");
+            draw_grid(ctx2, 10, 20, 'white', 'yellow');
+
+            //status counter for mergesort
+            mergesort_counter = 0
+            update_row(ctx2, data2, 0);
+
+            //quicksort setup
+            var canvas3 = document.getElementById("quicksort-grid");
+            var ctx3 = canvas3.getContext("2d");
+            draw_grid(ctx3, 10, 20, 'white', 'yellow');
+
+            //status counter for quicksort
+            quicksort_counter = 0
+            update_row(ctx3, data3, 0);
+
+            
+
+
+            
+            
+
+
+
+        </script>
+</html>
