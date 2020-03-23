@@ -27,7 +27,7 @@
             //sample data 
             var data1 = [0,5,'A',6,2,7,'B',2,'B',6,0,3];
             var data2 = [0,6,5,6,6,7,1,0,4,0,'B','A'];
-            var data3 = [0,6,8, 4,'B',8,9,3,5,7,5,4]
+            var data3 = [0,6,8, 4,'B',8,9,3,5,7,5,4];
 
             //poresort setup
             var canvas1 = document.getElementById("poresort-grid");
@@ -36,26 +36,30 @@
             //status counter for poresort
             poresort_counter = 0
             update_row(ctx1, data1, 0);
+            //bundle objects
+            poresort_bundle = {ctx1, poresort_counter, data1};
             
             //mergesort setup
             var canvas2 = document.getElementById("mergesort-grid");
             var ctx2 = canvas2.getContext("2d");
             draw_grid(ctx2, 10, 20, 'white', 'yellow');
-
             //status counter for mergesort
             mergesort_counter = 0
             update_row(ctx2, data2, 0);
+            //bundle objects
+            mergesort_bundle = {ctx2, mergesort_counter, data2};
 
             //quicksort setup
             var canvas3 = document.getElementById("quicksort-grid");
             var ctx3 = canvas3.getContext("2d");
             draw_grid(ctx3, 10, 20, 'white', 'yellow');
-
             //status counter for quicksort
             quicksort_counter = 0
             update_row(ctx3, data3, 0);
+            //bundle objects
+            quicksort_bundle = {ctx3, quicksort_counter, data3};
 
-            
+            race_mgr(poresort_bundle, mergesort_bundle, quicksort_bundle);
 
 
             

@@ -40,17 +40,35 @@ function update_row(ctx, array, current_row)
         output_text(ctx, i, current_row, array[i]);
     }
 }
-//race manager function
 
 //poresort
-function poresort(array, counter)
+function poresort(bundle, status)
 {
+    update_row(bundle.ctx1, bundle.data1, bundle.poresort_counter+1);
 
 }
 //Mergesort
-
+function mergesort(bundle, status)
+{
+    update_row(bundle.ctx2, bundle.data2, bundle.mergesort_counter+1);
+}
 //Quicksort
+function quicksort(bundle, status)
+{
+    update_row(bundle.ctx3, bundle.data3, bundle.quicksort_counter+1);
+}
 
+//race manager function
+function race_mgr(pore_bundle, merge_bundle, quick_bundle)
+{   
+    poresort_status = 0;
+    mergesort_status = 0;
+    quicksort_status = 0;
+    poresort(pore_bundle, poresort_status);
+    mergesort(merge_bundle, mergesort_status);
+    quicksort(quick_bundle, quicksort_status);
+    
+}
 // text output for single block
 function output_text(ctx, xCord, yCord, text)
 {
@@ -60,4 +78,11 @@ function output_text(ctx, xCord, yCord, text)
     ctx.font = "20px Arial";
     ctx.fillText(text, ((xCord * 20) + 3), ((yCord *20) + 17) );
 
+}
+
+function swap(array, left_index, right_index)
+{
+    var temp = items[left_index];
+    items[left_index] = items[right_index];
+    items[right_index] = temp;
 }
