@@ -43,9 +43,28 @@ function update_row(bundle)
         }
         bundle.current_row++;
     }
-    else if(bundle.done_merge == 0)
+    else if(bundle.done_merge == 0 || bundle.final_display == false)
     {
-        
+        i = 0
+        marker = 0;
+        while(i < (bundle.combined_holder_array[bundle.combined_level].length))
+        {
+            var length = bundle.combined_holder_array[bundle.combined_level][i].length;
+            j = 0;
+            
+            while(j < length)
+            {
+                output_text(bundle.ctx2, marker++, bundle.current_row, bundle.combined_holder_array[bundle.combined_level][i][j++]);
+                
+            }
+            i++;
+        }
+        bundle.current_row++;
+
+        if (bundle.done_merge == 1)
+        {
+            bundle.final_display = true;
+        }
     }
 
 
@@ -61,10 +80,7 @@ function poresort(bundle, status)
 //Mergesort
 function mergesort(bundle)
 {
-    if(bundle.current_row == 0)
-    {
-        update_row(bundle);
-    }
+    
     if(bundle.blank_holder_array.length == 0)
     {
         var bundle_of_arrays = new Array();
@@ -75,13 +91,19 @@ function mergesort(bundle)
         
     }
     
+    if(bundle.combined_holder_array.length == 0 && bundle.done_split == 1)
+    {
+        bundle.combined_holder_array.push(bundle.blank_holder_array[bundle.mergesort_level_counter - 1]);
+    }
+
 
     //merge section
     if(bundle.done_merge == 0 && bundle.done_split == 1)
     {
-        
-        merge_values(bundle);
         update_row(bundle);
+        merge_values(bundle);
+        
+        
 
     }
     //splitting the array into smaller bundles.
@@ -89,8 +111,11 @@ function mergesort(bundle)
     {
         update_row(bundle);
         split_array(bundle);
+        
        
     }
+
+    //update_row(bundle); 
 
     if(bundle.done_merge == 1 && bundle.done_split == 1)
     {
@@ -100,7 +125,7 @@ function mergesort(bundle)
     {
         return mergesort(bundle);
     }
-
+    
     
 }
 
@@ -166,12 +191,9 @@ function split_array(bundle)
     
 }
 
-function merge_values(bundle)
+
+ function merge_values(bundle)
 {
-    if(bundle.combined_holder_array.length == 0)
-    {
-        bundle.combined_holder_array.push(bundle.blank_holder_array[bundle.mergesort_level_counter - 1]);
-    }
     var combined_array = new Array();
 
     // for(i = 0; i < bundle.mergesort_level_counter; i++ )
@@ -206,12 +228,13 @@ function merge_values(bundle)
 
     bundle.combined_holder_array.push(combined_array);
     bundle.combined_level++;
-    if(bundle.combined_level == bundle.mergesort_level_counter)
+    if(bundle.combined_level == (bundle.mergesort_level_counter-1))
     {
         bundle.done_merge = 1;
         bundle.mergesort_status = 1;
+        update_row(bundle);
     }
-}
+};
 
 function base_merge(left, right)
 {
@@ -249,8 +272,7 @@ function race_mgr(pore_bundle, merge_bundle, quick_bundle)
     quicksort_status = 0;
     //poresort(pore_bundle, poresort_status);
     mergesort(merge_bundle);
-    //quicksort(quick_bundle, quicksort_status);
-    
+    //quicksort(quick_bundle, quicksort_status)
     
     
 }

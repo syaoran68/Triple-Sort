@@ -52,10 +52,11 @@
             var combined_holder_array = new Array();
             var combined_level = 0;
             var mergesort_status = 0;
+            final_display = false;
             done_split = 0;
             done_merge = 0;
             //bundle objects
-            mergesort_bundle = {ctx2, mergesort_level_counter, mergesort_number_of_split_data, data2, blank_holder_array, done_split, done_merge, current_row, combined_holder_array, combined_level};
+            mergesort_bundle = {ctx2, mergesort_level_counter, final_display, mergesort_number_of_split_data, data2, blank_holder_array, done_split, done_merge, current_row, combined_holder_array, combined_level};
 
             //quicksort setup
             var canvas3 = document.getElementById("quicksort-grid");
