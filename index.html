@@ -63,10 +63,17 @@
             var ctx3 = canvas3.getContext("2d");
             draw_grid(ctx3, 10, 20, 'white', 'yellow');
             //status counter for quicksort
+            quicksort_split_done = 0;
+            quicksort_right = 12;
+            quicksort_left = 0;
+            quicksort_done = 0;
+            var quicksort_holder_array = data3;
             quicksort_counter = 0
+            quicksort_current_row = 0;
+            quicksort_left_done = false;
             update_row(ctx3, data3, 0);
             //bundle objects
-            quicksort_bundle = {ctx3, quicksort_counter, data3};
+            quicksort_bundle = {ctx3, quicksort_counter, data3, quicksort_holder_array, quicksort_left, quicksort_right, quicksort_done, quicksort_current_row, quicksort_left_done };
 
             race_mgr(poresort_bundle, mergesort_bundle, quicksort_bundle);
 

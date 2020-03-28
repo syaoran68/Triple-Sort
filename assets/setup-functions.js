@@ -67,6 +67,15 @@ function update_row(bundle)
         }
     }
 
+    if(bundle.quicksort_done == 0)
+    {
+        for(i = 0; i < 12; i++)
+        {
+            output_text(bundle.ctx3, i, bundle.quicksort_current_row, bundle.data3[i]);
+        }
+        bundle.quicksort_current_row++;
+    }
+
 
     
 }
@@ -255,14 +264,88 @@ function base_merge(left, right)
 }
 
 //Quicksort
-function quicksort(bundle, status)
+function quicksort(bundle, left, right)
 {
+    update_row(bundle);
+    //find pivot
+    var pivot = Math.floor(((right) - left) / 2) ;
+    
+    //order around pivot
+    var new_pivot = quicksort_partition(bundle.data3, left, (right - 1));
+
+    
+
+    var size_of_left_side = (new_pivot - left);
+    var size_of_right_side = (right - new_pivot);
+
+    // push the front and back half of the sets
+
+    if(bundle.quicksort_done == 0 && size_of_left_side > 1)
+    {
+        //front half
+
+        
+
+        quicksort(bundle, left, new_pivot);
+        
+    }
+    if( size_of_left_side == 1)
+        {
+            bundle.quicksort_left_done = true;
+        }
+
+
+    
+    if(bundle.quicksort_done == 0 && bundle.quicksort_left_done == true)
+    {
+        //back half
+        if(size_of_right_side == 1)
+        {
+            quicksort_partition(bundle.data3, new_pivot, right);
+            return 0;
+        }
+        
+        quicksort(bundle, new_pivot, right);
+        if(size_of_right_side == 1)
+        {
+            return 0;
+        }
+    }
+    else
+    {
+        return 0;
+    }
 
 
 
-    update_row(bundle.ctx3, bundle.data3, bundle.quicksort_counter+1);
 
 }
+
+function quicksort_partition(array, left, right)
+{
+    var pivot = array[Math.floor(((right - left) + left) / 2)] ;
+    i = left;
+    j = right;
+
+    while(i <= j){
+        while(array[i] < pivot)
+        {
+            i++;
+        }
+        while(array[j] > pivot)
+        {
+            j--;
+        }
+        if(i <= j) 
+        {
+            swap(array, i, j);
+            i++;
+            j--;
+        }
+    }
+    return i;
+}
+
 
 //race manager function
 function race_mgr(pore_bundle, merge_bundle, quick_bundle)
@@ -272,7 +355,7 @@ function race_mgr(pore_bundle, merge_bundle, quick_bundle)
     quicksort_status = 0;
     //poresort(pore_bundle, poresort_status);
     mergesort(merge_bundle);
-    //quicksort(quick_bundle, quicksort_status)
+    quicksort(quick_bundle, quick_bundle.quicksort_left, quick_bundle.quicksort_right);
     
     
 }
@@ -289,7 +372,7 @@ function output_text(ctx, xCord, yCord, text)
 
 function swap(array, left_index, right_index)
 {
-    var temp = items[left_index];
-    items[left_index] = items[right_index];
-    items[right_index] = temp;
+    var temp = array[left_index];
+    array[left_index] = array[right_index];
+    array[right_index] = temp;
 }
