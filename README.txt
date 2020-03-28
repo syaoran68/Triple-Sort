@@ -52,3 +52,9 @@ Base (Base)
     -> setup-function.js
     -> styles.css
 
+All the display functionality should be ready for the sorting algorithms. mergesort is complete, and quicksort is about 75% of the way there.
+The only portion is the right section's recursive sorting.
+
+I didn't have enough time to do the poresort algorithm as team mates could not be found.
+
+
